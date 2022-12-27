@@ -8,7 +8,7 @@ p2 = 300
 xs = []
 ys = []
 
-video = cv2.VideoCapture("footvolleyball.mp4")
+video = cv2.VideoCapture("/home/galactus/Code/Projects Py/C107-Project/footvolleyball.mp4")
 #load tracker 
 tracker = cv2.TrackerCSRT_create()
 
@@ -43,17 +43,25 @@ def goal_track(img,bbox):
 def drawBox(img,bbox):
     x,y,w,h = int(bbox[0]),int(bbox[1]),int(bbox[2]),int(bbox[3])
     cv2.rectangle(img,(x,y),((x+w),(y+h)),(255,0,255),3,1)
-    cv2.putText(img,"Tracking",(75,90),cv2.FONT_HERSHEY_SIMPLEX,0.7,(0,255,0),2)
-
-
-
-def drawBox(img,bbox):
-    #write code for this function here
-    pass
-
+    cv2.putText(img,"Tracking",(75,90),cv2.QT_FONT_BLACK,0.7,(0,0,0),2)
 
 while True:
    #Write the code inside loop here
-   pass
+
+    available,img=video.read()
+    success,bbox=tracker.update(img)
+
+    if(success==True):
+        drawBox(img,bbox)
+    else:
+        cv2.putText(img,"Lost",(25,25),cv2.QT_FONT_BLACK,2,(0,0,0),2)
+
+    cv2.imshow("Result",img)
+
+    key=cv2.waitKey(1)
+
+    if(key==ord('q')):
+        break
+   
 video.release()
-cv2.destroyALLwindows() 
+cv2.destroyAllWindows() 
