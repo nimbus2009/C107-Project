@@ -8,7 +8,7 @@ p2 = 300
 xs = []
 ys = []
 
-video = cv2.VideoCapture("/home/galactus/Code/Projects Py/C107-Project/footvolleyball.mp4")
+video = cv2.VideoCapture("/home/galactus/Code/Projects Py/C107-Project/BB2.avi")
 #load tracker 
 tracker = cv2.TrackerCSRT_create()
 
